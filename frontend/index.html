@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive ToDo List</title>
+    <link rel="stylesheet" href="static/css/styles.css" />
+  </head>
+  <body>
+    <div class="app-container">
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <div class="logo">
+          <div class="logo-icon">😋</div>
+          <div class="logo-text">Good Morning<br />CHETAN !</div>
+        </div>
+
+        <div class="greeting">
+          <h2>Today</h2>
+          <p>Let's make today productive</p>
+        </div>
+
+        <button class="add-task-btn" onclick="toggleTaskForm()">
+          + Add a Task
+        </button>
+
+        <form class="task-form" id="taskForm" onsubmit="addTask(event)">
+          <input type="text" id="title" placeholder="Task Title" required />
+          <input type="date" id="dueDate" required />
+          <select id="priority">
+            <option value="Low">Low Priority</option>
+            <option value="Medium">Medium Priority</option>
+            <option value="High">High Priority</option>
+          </select>
+          <textarea
+            id="description"
+            placeholder="Add description..."
+          ></textarea>
+          <div class="form-buttons">
+            <button type="submit" class="btn-primary">Add Task</button>
+            <button
+              type="button"
+              class="btn-secondary"
+              onclick="toggleTaskForm()"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+
+        <div class="task-list-sidebar">
+          <div id="sidebarTasks"></div>
+
+          <div class="completed-section">
+            <div class="toggle-completed" onclick="toggleCompleted()">
+              <span>Completed</span>
+              <span id="completedCount">(0)</span>
+              <span class="toggle-arrow">↓</span>
+            </div>
+            <div id="completedTasks" style="display: none"></div>
+          </div>
+        </div>
+
+        <!-- Theme Toggle -->
+        <div class="theme-toggle" onclick="toggleTheme()">
+          <div class="theme-slider">
+            <div class="theme-icon sun-icon">☀️</div>
+            <div class="theme-icon moon-icon">🌙</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Board -->
+      <div class="main-board">
+        <div class="board-header">
+          <div class="date-section">
+            <p class="today">Today</p>
+            <h1 class="date" id="currentDate">June 2025</h1>
+            <p class="day" id="currentDay">21,Sat</p>
+          </div>
+
+          <div class="view-toggle">
+            <button class="view-btn" onclick="switchView('list')">List</button>
+            <button class="view-btn active" onclick="switchView('calendar')">
+              Calendar
+            </button>
+          </div>
+
+          <div class="search-box">
+            <input
+              type="text"
+              placeholder="Search"
+              id="searchInput"
+              onkeyup="searchTasks()"
+            />
+            <span class="search-icon">🔍</span>
+          </div>
+        </div>
+
+        <div class="filters">
+          <button class="filter-btn active" onclick="filterTasks('all')">
+            All
+          </button>
+          <button class="filter-btn" onclick="filterTasks('high')">
+            High Priority
+          </button>
+          <button class="filter-btn" onclick="filterTasks('medium')">
+            Medium Priority
+          </button>
+          <button class="filter-btn" onclick="filterTasks('low')">
+            Low Priority
+          </button>
+          <button class="filter-btn" onclick="clearCompletedTasks()">
+            Clear Completed
+          </button>
+          <button class="filter-btn" onclick="clearAllTasks()">
+            Clear All
+          </button>
+        </div>
+
+        <div class="kanban-board">
+          <div class="kanban-column todo">
+            <div class="column-header">
+              <span class="column-title">TO-DO</span>
+              <span class="task-count" id="todoCount">0</span>
+            </div>
+            <div id="todoTasks"></div>
+          </div>
+
+          <div class="kanban-column doing">
+            <!-- <div class="column-header">
+              <!-- <span class="column-title">Doing</span>
+              <span class="task-count" id="doingCount">0</span> -->
+            <!-- </div> -->
+            <div id="doingTasks"></div>
+          </div>
+
+          <div class="kanban-column done">
+            <div class="column-header">
+              <span class="column-title">Done</span>
+              <span class="task-count" id="doneCount">0</span>
+            </div>
+            <div id="doneTasks"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="static/javascript/script.js"></script>
+  </body>
+</html>
